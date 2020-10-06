@@ -20,6 +20,8 @@ namespace Worker
                                      autoDelete: false,
                                      arguments: null);
 
+                // Fair Dispatch: This tells RabbitMQ not to give more than one message to a worker at a time. 
+                // Or, in other words, don't dispatch a new message to a worker until it has processed and acknowledged the previous one. 
                 channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
 
                 Console.WriteLine(" [*] Waiting for messages.");
@@ -37,9 +39,8 @@ namespace Worker
 
                     Console.WriteLine(" [x] Done");
 
-                // Note: it is possible to access the channel via
-                //       ((EventingBasicConsumer)sender).Model here
-                channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
+                    // ack 處理
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag, multiple: false);
                 };
                 channel.BasicConsume(queue: "task_queue",
                                      autoAck: false,
