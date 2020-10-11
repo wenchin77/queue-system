@@ -17,10 +17,7 @@ class ReceiveLogsDirect
 
             if(args.Length < 1)
             {
-                Console.Error.WriteLine("Usage: {0} [info] [warning] [error]",
-                                        Environment.GetCommandLineArgs()[0]);
-                Console.WriteLine(" Press [enter] to exit.");
-                Console.ReadLine();
+                Console.Error.WriteLine("Usage: put in args [info] [warning] [error]");
                 Environment.ExitCode = 1;
                 return;
             }

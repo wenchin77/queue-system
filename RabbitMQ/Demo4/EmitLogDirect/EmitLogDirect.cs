@@ -16,13 +16,11 @@ class EmitLogDirect
                                     type: "direct");
             while (true)
             {
-                // dotnet run error "ERROR MESSAGE"
-                // dotnet run info "INFO MESSAGE"
-                // dotnet run warning "WARNING MESSAGE"
+                // dotnet run info
+                // dotnet run warning
+                // dotnet run error
                 var severity = (args.Length > 0) ? args[0] : "info";
-                var message = (args.Length > 1)
-                              ? string.Join(" ", args.Skip(1).ToArray())
-                              : $"[{DateTime.Now}] Hello World!";
+                var message = $"[{DateTime.Now}] Some {severity} message!";
                 var body = Encoding.UTF8.GetBytes(message);
                 channel.BasicPublish(exchange: "direct_logs",
                                      routingKey: severity,
