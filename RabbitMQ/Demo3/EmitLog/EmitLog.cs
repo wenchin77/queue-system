@@ -29,11 +29,4 @@ class EmitLog
             }
         }
     }
-
-    private static string GetMessage(string[] args)
-    {
-        return ((args.Length > 0)
-               ? string.Join(" ", args)
-               : "info: Hello World!");
-    }
 }
